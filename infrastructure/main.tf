@@ -28,9 +28,18 @@ resource "aws_s3_bucket_object" "codigo_spark" {
   key    = "emr-code/pyspark/job_spark_from_tf.py"
   acl    = "private"
   source = "../job_spark.py"
-  etag   = filemd5("job_spark.py") # Verifica se houve mudança no código spark
+  etag   = filemd5("../job_spark.py") # Verifica se houve mudança no código spark
 }
 
 provider "aws" {
   region = "${var.region}"
+}
+
+# Centralizar o arquivo de controle de estado do terraform
+terraform {
+  backend "s3" {
+    bucket = "terraform-state-lucas-igti"
+    key = "state/igti/edc/mod1/terraform.tfstate"
+    region = "us-east-2"
+  }
 }
