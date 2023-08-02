@@ -16,16 +16,10 @@ resource "aws_iam_role" "lambda" {
   ]
 }
 EOF
-
-  tags = {
-    IES   = "IGTI",
-    CURSO = "EDC"
-  }
-
 }
 
 resource "aws_iam_policy" "lambda" {
-  name        = "IGTIAWSLambdaBasicExecutionRolePolicy"
+  name        = "AWSLambdaBasicExecutionRolePolicy"
   path        = "/"
   description = "Provides write permissions to CloudWatch Logs, S3 buckets and EMR Steps"
 
